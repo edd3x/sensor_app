@@ -1,0 +1,17 @@
+geopandas==0.13.2
+ipyleaflet
+ipywidgets
+leafmap
+matplotlib==3.7.1
+numpy==1.24.3
+pandas==2.0.2
+pyproj==3.4.0
+reacton
+Shapely==2.0.2
+rasterio
+solara
+websockets==11.0.3
+simple-websocket==0.10.1
+flask-sock==0.6.0
+gunicorn
+Flask

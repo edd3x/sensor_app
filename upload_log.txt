@@ -1,0 +1,1 @@
+2024-01-10 12:25:12.852026 - Successful response: {"messages":["updatePlatform --> Check records : Success Value WF003 exists in our records for device_uid","Successfully updated platform WF003"],"status_code":200}

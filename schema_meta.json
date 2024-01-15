@@ -1,0 +1,204 @@
+{ "endpoint_schemas":{
+  "no_task":{"0":"0"},
+  "sensors/registerLocation":{
+                              "location_name": "WQ001",
+                              "longitude": [-3.2],
+                              "latitude": [53.7],
+                              "distance_from_datum": [103.7]
+                              },
+  "sensors/registerPlatform":{
+                              "platform_uid": "WQ001",
+                              "platform_name": "HOBO ",
+                              "platform_description": "HOBO Water depth device at Flander's moss",
+                              "platform_env_category": "Either Air, Land or Water",
+                              "platform_env_sub_category":  "A combination of these tags ('Urban Area', 'Industrial Area','Peatland','Nature Reserve','Loch','Reservoir','River','Estuary') but must be in 'square' brackets like this e.g. [Peatland,Nature Reserve]",
+                              "use_case_dashboard": "A combination of these tags ('air quality','biodiversity','floods','peatlands','water quality','demo') but must be in 'square' brackets like this e.g. [peatlands,water quality]",
+                              "mobile": false,
+                              "static_attributes": {
+                                      "manufacturer": "HOBO",
+                                      "date_purchased": "2022-10-01T15:02:00",
+                                      "serial_number": "SN-54325-09324",
+                                      "BES_asset_tag": "PO8658695404030",
+                                      "instrument_online_url": "www.HOBO.com/myinstrument",
+                                      "instrument_picture_url": "www.HOBO.com/myinstrument/picture",
+                                      "instrument_ERA_url": "www.forthera.stir.ac.uk/myinstrument",
+                                      "additional_information": {
+                                                  "purchase order information": "www.sharepoint.stir.ac.uk/mydocs"
+                                                }
+                                              }
+                              }, 
+  "sensors/updatePlatformDetails": {
+                                    "platform_uid": "WQ001",
+                                    "platform_name": "HOBO ",
+                                    "platform_description": "HOBO Water depth device at Flander,s moss",
+                                    "platform_env_category": "Either Air, Land or Water",
+                                    "platform_env_sub_category": "A combination of these tags ('Urban Area', 'Industrial Area','Peatland','Nature Reserve','Loch','Reservoir','River','Estuary') but must be in 'square' brackets like this e.g. [Peatland,Nature Reserve]",
+                                    "use_case_dashboard": "A combination of these tags ('air quality','biodiversity','floods','peatlands','water quality','demo') but must be in 'square' brackets like this e.g. [peatlands,water quality]",
+                                    "mobile": false,
+                                    "static_attributes": {
+                                      "manufacturer": "HOBO",
+                                      "date_purchased": "2022-10-01T15:02:00",
+                                      "serial_number": "SN-54325-09324",
+                                      "BES_asset_tag": "PO8658695404030",
+                                      "instrument_online_url": "www.HOBO.com/myinstrument",
+                                      "instrument_picture_url": "www.HOBO.com/myinstrument/picture",
+                                      "instrument_ERA_url": "www.forthera.stir.ac.uk/myinstrument",
+                                      "additional_information": {
+                                              "purchase order information": "www.sharepoint.stir.ac.uk/mydocs"
+                                                      }
+                                                    }
+                                  },                         
+  "sensors/registerSensorToPlatform":
+                                  {
+                                  "platform_uid": "WQ001",
+                                  "sensor_uid": "WQ001-001",
+                                  "sensor_name": "OTT Temperature sensor",
+                                  "sensor_description": "Temperature sensor in the north corner of Flander's moss",
+                                  "sensor_type": "Single time-series",
+                                  "sensor_env_category": "Either Air, Land or Water",
+                                  "sensor_env_sub_category":  "A combination of these tags ('Urban Area', 'Industrial Area','Peatland','Nature Reserve','Loch','Reservoir','River','Estuary') but must be in 'square' brackets like this e.g. [Loch,Nature Reserve]",
+                                  "use_case_dashboard": "A combination of these tags ('air quality','biodiversity','floods','peatlands','water quality','demo') but must be in 'square' brackets like this e.g. [water quality, floods]",
+                                  "platform_integrated": true,
+                                  "static_attributes": {
+                                    "manufacturer": "HOBO",
+                                    "date_purchased": "2022-10-01T15:02:00",
+                                    "serial_number": "SN-54325-09324",
+                                    "BES_asset_tag": "PO8658695404030",
+                                    "instrument_online_url": "www.HOBO.com/myinstrument",
+                                    "instrument_picture_url": "www.HOBO.com/myinstrument/picture",
+                                    "instrument_ERA_url": "www.forthera.stir.ac.uk/myinstrument",
+                                    "additional_information": {
+                                      "purchase order information": "www.sharepoint.stir.ac.uk/mydocs"
+                                    }
+                                  }
+                                },
+  "sensors/updateSensorMetadata":
+                                  {
+                                    "sensor_uid": "WQ001-001",
+                                    "sensor_name": "OTT Temperature sensor",
+                                    "sensor_description": "Temperature sensor in the north corner of Flander's moss",
+                                    "sensor_type": "Single time-series",
+                                    "sensor_env_category": "Either Air, Land or Water",
+                                    "sensor_env_sub_category": "A combination of these tags ('Urban Area', 'Industrial Area','Peatland','Nature Reserve','Loch','Reservoir','River','Estuary') but must be in 'square' brackets like this e.g. [Loch, Nature Reserve]",
+                                    "use_case_dashboard": "A combination of these tags ('air quality','biodiversity','floods','peatlands','water quality','demo') but must be in 'square' brackets like this e.g. [water quality, floods]",
+                                    "static_attributes": {
+                                      "manufacturer": "HOBO",
+                                      "date_purchased": "2022-10-01T15:02:00",
+                                      "serial_number": "SN-54325-09324",
+                                      "BES_asset_tag": "PO8658695404030",
+                                      "instrument_online_url": "www.HOBO.com/myinstrument",
+                                      "instrument_picture_url": "www.HOBO.com/myinstrument/picture",
+                                      "instrument_ERA_url": "www.forthera.stir.ac.uk/myinstrument",
+                                      "additional_information": {
+                                        "purchase order information": "www.sharepoint.stir.ac.uk/mydocs"
+                                      }
+                                  }
+                                  },
+    "sensors/registerDeviceAtLocation":
+                              {
+                                "location_name": "Location of WQ001 in Flanders Moss",
+                                "longitude": -3.2,
+                                "latitude": 53.7,
+                                "distance_from_datum": 103.7,
+                                "device_uid": "WQ001",
+                                "installation_date": "2022-03-01T14:30:00"
+                                    },
+  "sensors/updateDeviceCalibration":
+                                {
+                                      "device_uid": "WQ001",
+                                      "calibration_timestamp": "2022-03-01T14:30:00",
+                                      "calibration_frequency": 182,
+                                      "calibration_performed_by": "Peter Hunter",
+                                      "calibration_online_url": "www.forthera.stir.ac.uk/myplatform/calibrations/WQ001",
+                                      "notes": {
+                                        "visual_observations": "Some slime found on lens of instrument",
+                                        "notes": "Might need an extra calibration this year"
+                                      },
+                                      "platform_communication_details": {
+                                        "communication_method": "Mobile network",
+                                        "communication_transfer_protocol": "FTP",
+                                        "file_type": "comma seperated",
+                                        "network": "EE",
+                                        "IMIE_number": "8437609837601",
+                                        "phone_number": "07677839022",
+                                        "sim_number": "DG-783679837",
+                                        "platform_azure_upload_frequency_hours": 12
+                                      },
+                                      "sensor_calibration_parameters": {
+                                        "calibration_model": "exempt",
+                                        "parameters": "[1,1]"
+                                      }
+                                    },
+  "sensors/updateDeviceMaintenance":
+                                {
+                                    "device_uid": "WQ001",
+                                    "maintenance_timestamp": "2022-03-01T14:30:00",
+                                    "maintenance_frequency": 90,
+                                    "maintenance_performed_by": "Matthew Blake",
+                                    "notes": {
+                                      "visual_observations": "Some slime found on lens of instrument",
+                                      "notes": "Might need an extra calibration this year"
+                                    }
+                                  },
+  "sensors/registerParameter":
+                              {
+                                "parameter_uid": "WQ001-001-001",
+                                "parameter_visualised": true,
+                                "visualisation_highlight": true,
+                                "measurement_frequency_hours": 0,
+                                "limits": "[0,35]",
+                                "dataset_envelope": "Enter the device Lat/Lon in 'square' brackets e.g. [-3.2,53.0] envelop will be generated on submit",
+                                "sensor_uid": "WQ001-001",
+                                "measurand": "Water temperature",
+                                "parameter_description": "Water temperature at surface",
+                                "units": "°C",
+                                "depth": 0,
+                                "data_type": "float"
+                                  },
+
+            
+"sensors/updateLocationUsingUUID":{
+  "location_name": "WQ001",
+  "longitude": [-3.2],
+  "latitude": [53.7],
+  "distance_from_datum": [103.7],
+  "location_uuid": "42429285-a19c-4364-af63-acef573bb456"
+},
+"sensors/updateParameterVisualisationStatus":{
+  "parameter_uid": "WQ001-001-001",
+  "parameter_visualised": true,
+  "visualisation_highlight": true,
+  "measurement_frequency_hours": 0,
+  "limits": "[0,35]",
+  "dataset_envelope": "Enter the device Lat/Lon in 'square' brackets e.g. [-3.2,53.0] envelop will be generated on submit"
+}},
+
+"put_endPoints":{
+"":"no_task",
+"Register a new location ": "sensors/registerLocation",
+"Register a new platform ": "sensors/registerPlatform",
+"Update an existing platform ": "sensors/updatePlatformDetails",
+"Attach a new sensor to a platform ": "sensors/registerSensorToPlatform",
+"Update existing sensor metadata ": "sensors/updateSensorMetadata",
+"Install a device at a location ": "sensors/registerDeviceAtLocation",
+"Update platform calibration ": "sensors/updateDeviceCalibration",
+"Update platform maintenance ": "sensors/updateDeviceMaintenance",
+"Register a sensor parameter ": "sensors/registerParameter",
+"Move or update an existing location ": "sensors/updateLocationUsingUUID",
+"Add or remove visual status ": "sensors/updateParameterVisualisationStatus"
+},
+
+"get_endPoints":{
+"":"no_task",
+"List measurands": "sensors/GetMeasurands",
+"List devices": "sensors/GetDeviceList",
+"Get a list of paratemers": "sensors/GetParameterLocationUUIDS",
+"Get calibration history of device": "sensors/GetDeviceCalibrationHistory/{sensor_uid}",
+"Get maintenance history of device": "sensors/GetDeviceMaintenanceHistory/{sensor_uid}",
+"Get maintenance records ": "sensors/GetLatestMaintenanceRecords",
+"Get calibration records ": "sensors/GetLatestCalibrationRecords",
+"List the names of places ": "sensors/GetLayersOfInterest"
+}
+
+}
+
