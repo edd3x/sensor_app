@@ -127,7 +127,6 @@ class Map(leafmap.Map):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         if sensor_map.value is not None:
-            # geojson = leafmap.gdf_to_geojson(sensor_map.value, epsg="4326")
             self.add_gdf(gdf=sensor_map.value, layer_name='Sensor Locations', zoom_to_layer=True, info_mode='on_click')
         
 class doubleQuoteDict(dict):
@@ -158,9 +157,6 @@ def file_input_details(schema, file_handler):
     solara.FileDownload(data=temp_df.to_csv(index=False), filename=f'template_for_{schema}.csv', label=f'Get Template')
     solara.Markdown(md_text='Upload CSV file')
     solara.FileDrop(label='Drop CSV file here...',on_file=file_handler ,lazy=True)
-    
-    
-    # solara.FileDrop(label='Drop CSV file here...',on_file=file_handler ,lazy=True)
                 
 
 @solara.component
@@ -181,7 +177,7 @@ def Page():
     api_response, set_response = solara.use_state(None)
     sensor, set_sensor = solara.use_state(None)
     tag_verified, set_tag_verified = solara.use_state('All Good')
-    upload_file, set_upload_file = solara.use_state(None)
+
     latitude_, set_latitude = solara.use_state(None)
     longitude_, set_longitude= solara.use_state(None)
     open_login, set_open_login = solara.use_state(False)
