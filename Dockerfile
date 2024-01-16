@@ -16,6 +16,8 @@ WORKDIR /home/site/wwwroot
 
 ENV SOLARA_APP=app.py
 
+ENV SENSOR_API=https://forthera-api.azurewebsites.net/
+
 # Export web server port
 EXPOSE 8765
 

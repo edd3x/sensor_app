@@ -149,12 +149,14 @@ def show_eg_schema(eg_schema):
         solara.HTML(tag='code', unsafe_innerHTML=example)
 
 @solara.component
-def file_input_details(schema, file_handler):
+def file_input_details(schema, name, file_handler):
+    name = name.replace(' ', '_')
+    print(name)
     temp_df = pd.DataFrame(schema, index=[0])
     if 'static_attributes' in temp_df.columns:
         temp_df['static_attributes'] = str(doubleQuoteDict(schema['static_attributes']))
 
-    solara.FileDownload(data=temp_df.to_csv(index=False), filename=f'template_for_{schema}.csv', label=f'Get Template')
+    solara.FileDownload(data=temp_df.to_csv(index=False), filename=f'template_for_{name}.csv', label=f'Get Template')
     solara.Markdown(md_text='Upload CSV file')
     solara.FileDrop(label='Drop CSV file here...',on_file=file_handler ,lazy=True)
                 
@@ -743,7 +745,7 @@ def Page():
                 with solara.GridFixed(columns=3):
                     with solara.Card(title='Step 1: Register Platforms'):
                         solara.Markdown(md_text='Upload metadata for a list of platforms')
-                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"][task.value]], on_file_platforms)
+                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"][task.value]], task.value, on_file_platforms)
                         
                         if api_response is not None:
                             solara.Info(f'Response: {api_response}', text=True, icon=True)
@@ -751,7 +753,7 @@ def Page():
                         
                     with solara.Card(title='Step 2: Register Platform Locations'):
                         solara.Markdown(md_text='Upload metadata for a list of platform locations')
-                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Install a device at a location "]], on_file_platform_location)
+                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Install a device at a location "]], "Install a device at a location", on_file_platform_location)
                         
                         if api_response is not None:
                             solara.Info(f'Response: {api_response}', text=True, icon=True)
@@ -759,7 +761,7 @@ def Page():
                         
                     with solara.Card(title='Step 3: Add Devices to Platforms'):
                         solara.Markdown(md_text='Upload metadata for a list of sensors attached to the registered platforms')
-                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Attach a new sensor to a platform "]], on_file_sensors)
+                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Attach a new sensor to a platform "]], "Attach a new sensor to a platform", on_file_sensors)
                         
                         if api_response is not None:
                             solara.Info(f'Response: {api_response}', text=True, icon=True)
@@ -767,24 +769,24 @@ def Page():
                         
                     with solara.Card(title='Step 4: Register Device Locations'):
                         solara.Markdown(md_text='Upload metadata for a list of device locations (Must be same as platform)')
-                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Install a device at a location "]], on_file_sensor_location)
+                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Install a device at a location "]], "Install a device at a location" ,on_file_sensor_location)
                         
                         if api_response is not None:
                             solara.Info(f'Response: {api_response}', text=True, icon=True)
                         
                     with solara.Card(title='Step 5: Add device calibrations and maintenance history'):
                         solara.Markdown(md_text='Upload information on device calibration, download template via the link below')
-                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Update platform calibration "]], on_file_calibration_location)
+                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Update platform calibration "]], "Update platform calibration", on_file_calibration_location)
 
                         solara.Markdown(md_text='Upload information on maintenance history, download template via the link below')
-                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Update platform maintenance "]], on_file_maintenance_history)
+                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Update platform maintenance "]], "Update platform maintenance", on_file_maintenance_history)
                         
                         if api_response is not None:
                             solara.Info(f'Response: {api_response}', text=True, icon=True)
                         
                     with solara.Card(title='Step 6: Register Device Parameters'):
                         solara.Markdown(md_text='Upload metadata for a list of parameters and measurands for each attached sensors')
-                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Register a sensor parameter "]], on_file_params)
+                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Register a sensor parameter "]], "Register a sensor parameter", on_file_params)
                         
                         if api_response is not None:
                             solara.Info(f'Response: {api_response}', text=True, icon=True)
