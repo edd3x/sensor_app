@@ -100,7 +100,6 @@ stations_packet = {
 
 sensor_attrib = [
     'platform_uid',
-    'device_name',
     'location_name',
     'last_recorded_timestamp',
     'geometry']
