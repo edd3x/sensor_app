@@ -9,7 +9,7 @@ pyproj==3.4.0
 reacton
 Shapely==2.0.2
 rasterio
-solara
+solara==1.27.0
 websockets==11.0.3
 simple-websocket==0.10.1
 flask-sock==0.6.0

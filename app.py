@@ -15,11 +15,16 @@ import reacton.ipyvuetify as v
 from solara.components.file_drop import FileInfo
 from solara.lab.components.confirmation_dialog import ConfirmationDialog
 
+#########################################################################
+########################## REQUIRED META DATA ###########################
+#########################################################################
 backend_url = os.environ.get('SENSOR_API')
 schemas = json.load(open('./schema_meta.json'))
 date_time_stamp = datetime.now()
 
-
+#########################################################################
+####################### SOLARA REACTIVE VARIABLES #######################
+#########################################################################
 zoom = solara.reactive(10.5)
 center = solara.reactive((56.11, -3.93))
 
@@ -56,7 +61,9 @@ sensor_map = solara.reactive(None)
 
 api_response_records = []
 
-
+#########################################################################
+################# GEOMETRY FOR LOCATION INSTALLED SENSORS################
+#########################################################################
 stations_packet = {
         "sensor_uids":None,
         "measurands": None,
@@ -93,10 +100,9 @@ stations_packet = {
 
 sensor_attrib = [
     'platform_uid',
-    'device_name', 
-    'device_description',
-    'last_recorded_timestamp', 
-    'value',
+    'device_name',
+    'location_name',
+    'last_recorded_timestamp',
     'geometry']
 
 useCaseDashboard = [
@@ -123,19 +129,30 @@ sensorSubCategory = [
     "Estuary"]
 
 
+
+#########################################################################
+################# LEAFMAP CLASS TO SHOW SENSOR LOCATIONS ###############
+#########################################################################
 class Map(leafmap.Map):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         if sensor_map.value is not None:
             self.add_gdf(gdf=sensor_map.value, layer_name='Sensor Locations', zoom_to_layer=True, info_mode='on_click')
-        
+
+#########################################################################
+################# CLASS TO GENERATE DOUBLE QUOTES FOR METADATA############
+#########################################################################      
 class doubleQuoteDict(dict):
         def __str__(self):
             return json.dumps(self)
 
         def __repr__(self):
             return json.dumps(self)
-        
+
+
+#########################################################################
+################# GEOMETRY FOR LOCATION INSTALLED SENSORS ###############
+#########################################################################     
 @solara.component
 def meta_input(value_src):
     solara.InputText(label='Enter the json string', value=value_src, continuous_update=continuous_update.value)
@@ -161,8 +178,12 @@ def file_input_details(schema, name, file_handler):
     solara.FileDrop(label='Drop CSV file here...',on_file=file_handler ,lazy=True)
                 
 
+#########################################################################
+############################ MAIN APP PAGE ##############################
+#########################################################################  
 @solara.component
 def Page():
+    ############################ VARIABLE STATES ##############################
     task_type, set_task_type = solara.use_state(None)
     api_task, set_api_task = solara.use_state(None)
     content, set_content = solara.use_state(b"")
@@ -189,6 +210,7 @@ def Page():
     
     response_records, set_response_records = solara.use_state(None)
     
+    ############################ FUNCTIONS ##############################
     def tag_verification(tag_list:list, accepted_tags:list):
         for t in tag_list:
             print(t)
@@ -208,7 +230,17 @@ def Page():
     def setCoords(lat: float, lon: float):
         set_latitude(lat)
         set_longitude(lon)
+        
+    def toggle_login():
+        if open_login:
+            set_open_login(False)
+        set_logged_in(not logged_in)
+        set_open_login(True)
 
+    def close_login():
+        set_open_login(False)
+
+    ############################ AUTH FUNCTIONS ##############################
     def authenticate(_username, _password):
         try:
             # Read write access
@@ -232,15 +264,8 @@ def Page():
                 set_auth('Check username and password')
 
     
-    def toggle_login():
-        if open_login:
-            set_open_login(False)
-        set_logged_in(not logged_in)
-        set_open_login(True)
-
-    def close_login():
-        set_open_login(False)
-        
+    
+    ############################ API POST QUERY FUNCTION ##############################
     def post_query_endpoint(packet,endpoint):
         print('making a call to endpoint -',endpoint) 
         response  = session.post(backend_url + endpoint, json=packet,timeout=20)
@@ -257,7 +282,8 @@ def Page():
             else:
                 print('Server error')
                 # print(response.text)
-
+    
+    ############################ API POST QUERY SINGLE UPDATE ##############################
     def query_endpoint_single(packet,endpoint):
         error_.set(None)
         set_tag_verified('All Good')
@@ -307,7 +333,7 @@ def Page():
         except:
             error_.set(f'Check Tags')
 
-
+    ############################ API POST QUERY BULK UPDATE ##############################
     def query_endpoint_bulk(data, endpoint):
         set_tag_verified('All Good')
         try:
@@ -495,14 +521,7 @@ def Page():
         f = file["file_obj"]
         set_maintenance_content(f.read())
         
-        
 
-    home_head = """
-        <h1 style="text-align:center; margin: 30px;">Sensor API Home</h1>
-    """
-    task_head = """
-        <h2 style="text-align:center; margin: 35px;">Select a Task</h2>
-    """
     home_text = """
         <p style="text-align:center;font-size: 20px; line-height: 35px">Welcome to the ForthERA sensors API web interface. </br>
         This web interface will enable you to interact with the sensor API, </br> 
