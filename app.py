@@ -618,19 +618,6 @@ def Page():
                     print(endpoint)
                     item_json = session.get(backend_url + endpoint)
                     solara.DataFrame(pd.DataFrame(json.loads(item_json.text)['data']))
-                    # solara.CrossFilterDataFrame(pd.DataFrame(json.loads(item_json.text)['data']))
-
-
-            # elif taskOps.value == "Get Location information from Latitude and Longitude":
-            #     solara.InputText(label='Enter latitude', value=latitude, continuous_update=continuous_update.value)
-            #     solara.InputText(label='Enter longitude', value=longitude, continuous_update=continuous_update.value)
-            #     solara.Button(label="Submit", on_click=lambda: setCoords(latitude.value, longitude.value), color='#1976d2', classes=['tsk-btn'])
-                
-            #     if (latitude != None) & (longitude != None) & (taskOps.value != ""):
-            #         endpoint = schemas['get_endPoints'][taskOps.value].replace('{latitude},{longitude}', f'{latitude_},{longitude_}')
-            #         print(endpoint)
-            #         item_json = session.get(backend_url + endpoint)
-            #         solara.DataFrame(pd.DataFrame(json.loads(item_json.text)['data']))
             else:
                 item_json = session.get(backend_url + schemas['get_endPoints'][taskOps.value])
                 print(item_json)
@@ -689,7 +676,7 @@ def Page():
                     
                     with solara.Card(title='Step 6: Register Device Parameters'):
                         solara.Markdown(md_text='Enter metadata for device parameters, see format below')
-                        show_eg_schema(doubleQuoteDict(schemas["endpoint_schemas"][schemas["put_endPoints"]["Install a device at a location "]]))
+                        show_eg_schema(doubleQuoteDict(schemas["endpoint_schemas"][schemas["put_endPoints"]["Register a sensor parameter "]]))
                         meta_input(platform_location_meta_string)
 
             if api_response is not None:
@@ -787,7 +774,7 @@ def Page():
                         
                     with solara.Card(title='Step 4: Register Device Locations'):
                         solara.Markdown(md_text='Upload metadata for a list of device locations (Must be same as platform)')
-                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Install a device at a location "]], "Install a device at a location" ,on_file_sensor_location)
+                        file_input_details(schemas["endpoint_schemas"][schemas["put_endPoints"]["Install a device at a location "]], "Install a device at a location", on_file_sensor_location)
                         
                         if api_response is not None:
                             solara.Info(f'Response: {api_response}', text=True, icon=True)
@@ -875,4 +862,3 @@ def Page():
                             solara.FileDownload(data=open('./upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
                 
 Page()
-    
