@@ -1,2 +1,0 @@
-2024-03-26 14:37:56.511510 - Successful response: {"messages":["Successfully added platform MS005"],"status_code":200}
-2024-03-26 14:37:56.511510 - Successful response: {"messages":["installDevice --> Check records : Success Value MS005 exists in our records for device_uid","Installed device MS005"],"status_code":200}

@@ -2,13 +2,15 @@ import os
 import io
 import sys
 import json
+import glob
 import solara
 import leafmap
 import requests
 import pandas as pd
 import geopandas as gp
-from typing import Union
 from datetime import datetime
+from shutil import rmtree
+from shapely import Point, box, to_geojson, to_wkt
 
 import reacton.ipywidgets as widgets
 import reacton.ipyvuetify as v
@@ -209,6 +211,13 @@ def Page():
     
     response_records, set_response_records = solara.use_state(None)
     
+    ############################ CLEAN LOGS ##############################
+    # logs = glob.glob('./logs/*txt')
+    # if 
+    # for file in glob.glob('./logs/*txt'):
+    #     if os.path.exists(file):
+    #         rmtree(file)
+    
     ############################ FUNCTIONS ##############################
     def tag_verification(tag_list:list, accepted_tags:list):
         for t in tag_list:
@@ -309,6 +318,12 @@ def Page():
                 print('Checking use_case_dashboard tags')
                 tag_verification(packet_['use_case_dashboard'], useCaseDashboard)
             
+            if 'dataset_envelope' in packet_.keys():
+                print(packet_['dataset_envelope'])
+                lon = packet_['dataset_envelope'][0]
+                lat = packet_['dataset_envelope'][1]
+                packet_['dataset_envelope'] = to_wkt(box(*Point(lon, lat).buffer(0.00005).envelope.bounds))
+            
             print('making a call to endpoint -',endpoint) 
             response  = session.put(backend_url + endpoint, json=packet_,timeout=20)
             code = response.status_code
@@ -377,6 +392,13 @@ def Page():
                 
                 if 'sensor_calibration_parameters' in mdata[1].to_dict().keys():
                     packet['sensor_calibration_parameters'] = json.loads(mdata[1]['sensor_calibration_parameters'])
+                    
+                if 'dataset_envelope' in mdata[1].to_dict().keys():
+                    print(mdata[1]['dataset_envelope'])
+                    lon = mdata[1]['dataset_envelope'].strip('][').split(',')[0]
+                    lat = mdata[1]['dataset_envelope'].strip('][').split(',')[1]
+                    # geom_wkt = to_wkt(box(*Point(lon, lat).buffer(0.00005).envelope.bounds))
+                    packet['dataset_envelope'] = to_wkt(box(*Point(lon, lat).buffer(0.00005).envelope.bounds))
                 
                 print(packet)
 
@@ -702,12 +724,12 @@ def Page():
 
                     if response_records is not None:
                         print(response_records)
-                        logfile = open('upload_log.txt','w')
+                        logfile = open('logs/upload_log.txt','w')
                         for record in response_records:
                             logfile.write(record+"\n")
                         logfile.close()
                             
-                        solara.FileDownload(data=open('./upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
+                        solara.FileDownload(data=open(f'./logs/upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
                         
 
         # Register a or update other metadata (single)
@@ -732,12 +754,12 @@ def Page():
                             
                         if response_records is not None:
                             print(response_records)
-                            logfile = open('upload_log.txt','w')
+                            logfile = open('logs/upload_log.txt','w')
                             for record in response_records:
                                 logfile.write(record+"\n")
                             logfile.close()
                             
-                            solara.FileDownload(data=open('./upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
+                            solara.FileDownload(data=open(f'./logs/upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
                     
 
 
@@ -813,12 +835,12 @@ def Page():
                         
                     if response_records is not None:
                         print(response_records)
-                        logfile = open('upload_log.txt','w')
+                        logfile = open('logs/upload_log.txt','w')
                         for record in response_records:
                             logfile.write(record+"\n")
                         logfile.close()
                                 
-                        solara.FileDownload(data=open('./upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
+                        solara.FileDownload(data=open(f'./logs/upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
         
         # Bulk metadata update
         if (task_type == "bulk") & (task.value != "Attach a new sensor to a platform ") & (task.value!="Register a new platform "):
@@ -854,11 +876,11 @@ def Page():
                             
                         if response_records is not None:
                             print(response_records)
-                            logfile = open('upload_log.txt','w')
+                            logfile = open('logs/upload_log.txt','w')
                             for record in response_records:
                                 logfile.write(record+"\n")
                             logfile.close()
                                     
-                            solara.FileDownload(data=open('./upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
+                            solara.FileDownload(data=open(f'./logs/upload_log.txt', "rb"), filename=f'upload_log_at_{date_time_stamp}.txt', label=f'Get Logs')
                 
 Page()
